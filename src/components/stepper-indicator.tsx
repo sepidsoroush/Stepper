@@ -14,9 +14,11 @@ const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
         <Fragment key={step}>
           <div
             className={cn(
-              "w-[40px] h-[40px] flex justify-center items-center m-[5px] border-[2px] rounded-full",
-              step < activeStep && "bg-primary text-white",
-              step === activeStep && "border-primary text-primary"
+              "w-[40px] h-[40px] flex justify-center items-center m-[5px] border-2 rounded-full dark:border-secondary/50 text-primary/50 dark:text-secondary/50",
+              step < activeStep &&
+                "border-primary bg-primary dark:bg-secondary text-primary-foreground dark:text-primary",
+              step === activeStep &&
+                "border-primary dark:border-secondary text-primary dark:text-secondary"
             )}
           >
             {step >= activeStep ? step : <Check className="h-5 w-5" />}
@@ -25,8 +27,9 @@ const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
             <Separator
               orientation="horizontal"
               className={cn(
-                "w-[100px] h-[2px]",
-                step <= activeStep - 1 && "bg-primary"
+                "w-[100px] h-[2px] dark:bg-secondary dark:opacity-50",
+                step <= activeStep - 1 &&
+                  "bg-primary dark:bg-secondary dark:opacity-100"
               )}
             />
           )}

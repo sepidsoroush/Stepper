@@ -24,14 +24,13 @@ const MultiStepForm = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   return (
-    <div className="border p-4 rounded-xl">
+    <div className="border p-4 rounded-xl dark:border-secondary/50">
       <StepperIndicator activeStep={activeStep} />
       {getStepContent(activeStep)}
-      <div className="flex justify-center space-x-[20px]">
+      <div className="flex flex-row gap-4 justify-center items-center">
         <Button
-          type="button"
-          className="w-[100px]"
-          variant="secondary"
+          variant="outline"
+          className="w-24 rounded-3xl dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
           onClick={handleBack}
           disabled={activeStep === 1}
         >
@@ -39,14 +38,17 @@ const MultiStepForm = () => {
         </Button>
         {activeStep === 3 ? (
           <Button
-            className="w-[100px]"
-            type="button"
+            className="w-24 rounded-3xl dark:bg-secondary dark:text-primary dark:hover:bg-secondary/90"
             onClick={() => console.log("Completed!")}
           >
             Done
           </Button>
         ) : (
-          <Button type="button" className="w-[100px]" onClick={handleNext}>
+          <Button
+            variant="outline"
+            className="w-24 rounded-3xl dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
+            onClick={handleNext}
+          >
             Next
           </Button>
         )}
