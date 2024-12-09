@@ -1,8 +1,8 @@
 const DummyContent = ({ step }: { step: number }) => {
   const divs = [
-    { id: 1, width: "300px" },
-    { id: 2, width: "250px" },
-    { id: 3, width: "200px" },
+    { id: 1, width: "w-full" },
+    { id: 2, width: "w-5/6" },
+    { id: 3, width: "w-4/6" },
   ];
 
   const orderedDivs = [...divs];
@@ -15,10 +15,7 @@ const DummyContent = ({ step }: { step: number }) => {
   return (
     <div className="my-8 space-y-4">
       {rotatedDivs.map((div) => (
-        <div
-          key={div.id}
-          className={`rounded-md bg-muted h-4 w-[${div.width}]`}
-        />
+        <div key={div.id} className={`rounded-md bg-muted h-4 ${div.width}`} />
       ))}
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import DummyContent from "./dummy-content";
 import StepperIndicator from "./stepper-indicator";
@@ -18,16 +19,34 @@ function getStepContent(step: number) {
 
 const MultiStepForm = () => {
   const [activeStep, setActiveStep] = useState(1);
+  const [direction, setDirection] = useState<"left" | "right">("left"); // Track direction
+
   const handleNext = async () => {
+    setDirection("left");
     if (activeStep < 3) setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+
   const handleBack = () => {
+    setDirection("right");
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   return (
-    <div className="border p-4 rounded-xl dark:border-secondary/50">
+    <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden">
       <StepperIndicator activeStep={activeStep} />
-      {getStepContent(activeStep)}
+      <motion.div
+        key={activeStep}
+        initial={{ x: direction === "left" ? 300 : -300 }}
+        animate={{ x: 0 }}
+        exit={{ x: direction === "left" ? -300 : 300 }}
+        transition={{
+          type: "tween",
+          ease: "easeOut",
+          duration: 0.3,
+        }}
+      >
+        {getStepContent(activeStep)}
+      </motion.div>
       <div className="flex flex-row gap-4 justify-center items-center">
         <Button
           variant="outline"

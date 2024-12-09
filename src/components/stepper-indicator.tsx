@@ -1,7 +1,6 @@
-import { Fragment } from "react";
-import { Separator } from "@/components/ui/separator";
+import { Fragment, ComponentProps } from "react";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface StepperIndicatorProps {
   activeStep: number;
@@ -12,26 +11,42 @@ const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
     <div className="flex justify-center items-center">
       {[1, 2, 3].map((step) => (
         <Fragment key={step}>
-          <div
+          <motion.div
+            animate={{
+              scale: step === activeStep ? 1.1 : 1,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            }}
             className={cn(
               "w-[40px] h-[40px] flex justify-center items-center m-[5px] border-2 rounded-full dark:border-secondary/50 text-primary/50 dark:text-secondary/50",
               step < activeStep &&
                 "border-primary bg-primary dark:bg-secondary text-primary-foreground dark:text-primary",
               step === activeStep &&
-                "border-primary dark:border-secondary text-primary dark:text-secondary"
+                "border-primary dark:border-secondary text-primary dark:text-secondary transition delay-300 ease-in-out duration-300"
             )}
           >
-            {step >= activeStep ? step : <Check className="h-5 w-5" />}
-          </div>
+            {step >= activeStep ? step : <CheckIcon className="h-5 w-5" />}
+          </motion.div>
           {step !== 3 && (
-            <Separator
-              orientation="horizontal"
-              className={cn(
-                "w-[100px] h-[2px] dark:bg-secondary dark:opacity-50",
-                step <= activeStep - 1 &&
-                  "bg-primary dark:bg-secondary dark:opacity-100"
-              )}
-            />
+            <div className="relative w-[100px] h-[2px]">
+              <div
+                className={cn(
+                  "absolute inset-0 bg-border dark:bg-secondary dark:opacity-50"
+                )}
+              />
+              <motion.div
+                animate={{ width: step <= activeStep - 1 ? "100%" : "0%" }}
+                transition={{
+                  type: "tween",
+                  ease: "easeOut",
+                  duration: 0.3,
+                }}
+                className={cn("absolute inset-0 bg-primary dark:bg-secondary")}
+              />
+            </div>
           )}
         </Fragment>
       ))}
@@ -39,3 +54,29 @@ const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
   );
 };
 export default StepperIndicator;
+
+function CheckIcon(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      {...props}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={3}
+    >
+      <motion.path
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{
+          delay: 0.2,
+          type: "tween",
+          ease: "easeOut",
+          duration: 0.3,
+        }}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  );
+}
