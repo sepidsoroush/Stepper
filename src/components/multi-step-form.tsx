@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
-import DummyForm from "./dummy-form";
+import DummyContent from "./dummy-content";
 import StepperIndicator from "./stepper-indicator";
 
 function getStepContent(step: number) {
   switch (step) {
     case 1:
-      return <DummyForm />;
+      return <DummyContent step={1} />;
     case 2:
-      return <DummyForm />;
+      return <DummyContent step={2} />;
     case 3:
-      return <DummyForm />;
+      return <DummyContent step={3} />;
     default:
       return "Unknown step";
   }
 }
+
 const MultiStepForm = () => {
   const [activeStep, setActiveStep] = useState(1);
   const handleNext = async () => {
