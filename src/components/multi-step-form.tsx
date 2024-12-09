@@ -46,11 +46,23 @@ const MultiStepForm = () => {
   return (
     <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden">
       {isCompleted ? (
-        <div className="relative flex flex-col flex-wrap justify-center items-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative flex flex-col flex-wrap justify-center items-center p-4"
+        >
           <Confetti />
           <div className="absolute top-0 mt-4 text-md dark:text-secondary text-center">
             I hope you have fun using this component. Please feel free to reach
-            me at s.soroush2012@gmail.com
+            me at{" "}
+            <a
+              className="hover:text-emerald-500"
+              href="mailto:s.soroush2012@gmail.com"
+            >
+              s.soroush2012@gmail.com
+            </a>
           </div>
           <Button
             variant="outline"
@@ -59,7 +71,7 @@ const MultiStepForm = () => {
           >
             <RotateCcw />
           </Button>
-        </div>
+        </motion.div>
       ) : (
         <div>
           <StepperIndicator activeStep={activeStep} />
