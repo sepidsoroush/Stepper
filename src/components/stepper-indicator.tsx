@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 
 interface StepperIndicatorProps {
   activeStep: number;
+  totalSteps: number;
 }
 
-const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
+const StepperIndicator = ({
+  activeStep,
+  totalSteps,
+}: StepperIndicatorProps) => {
+  const steps = Array.from({ length: totalSteps }, (_, index) => index + 1);
+
   return (
     <div className="flex justify-center items-center">
-      {[1, 2, 3].map((step) => (
+      {steps.map((step) => (
         <Fragment key={step}>
           <motion.div
             animate={{
@@ -30,7 +36,7 @@ const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
           >
             {step >= activeStep ? step : <CheckIcon className="h-5 w-5" />}
           </motion.div>
-          {step !== 3 && (
+          {step !== totalSteps && (
             <div className="relative w-[100px] h-[2px]">
               <div
                 className={cn(

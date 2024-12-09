@@ -1,80 +1,32 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useStepper } from "@/hooks/useStepper";
 import { Button } from "./ui/button";
 import Confetti from "./ui/confetti";
-import DummyContent from "./dummy-content";
 import StepperIndicator from "./stepper-indicator";
+import DummyContent from "./dummy-content";
+import StepperButtons from "./stepper-buttons";
 import { RotateCcw } from "lucide-react";
 
-function getStepContent(step: number) {
-  switch (step) {
-    case 1:
-      return <DummyContent step={1} />;
-    case 2:
-      return <DummyContent step={2} />;
-    case 3:
-      return <DummyContent step={3} />;
-    default:
-      return "Unknown step";
-  }
-}
-
 const MultiStepForm = () => {
-  const [activeStep, setActiveStep] = useState(1);
-  const [direction, setDirection] = useState<"left" | "right">("left");
-  const [isCompleted, setIsCompleted] = useState(false);
+  const totalSteps = 3;
 
-  const handleNext = async () => {
-    setDirection("left");
-    if (activeStep < 3) setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setDirection("right");
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleDone = () => {
-    setIsCompleted(true);
-  };
-
-  const handleRestart = () => {
-    setActiveStep(1);
-    setIsCompleted(false);
-  };
+  const {
+    activeStep,
+    direction,
+    isCompleted,
+    handleNext,
+    handleBack,
+    handleDone,
+    handleRestart,
+  } = useStepper(totalSteps);
 
   return (
     <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden">
       {isCompleted ? (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="relative flex flex-col flex-wrap justify-center items-center p-4"
-        >
-          <Confetti />
-          <div className="absolute top-0 mt-4 text-md dark:text-secondary text-center">
-            I hope you have fun using this component. Please feel free to reach
-            me at{" "}
-            <a
-              className="hover:text-emerald-500"
-              href="mailto:s.soroush2012@gmail.com"
-            >
-              s.soroush2012@gmail.com
-            </a>
-          </div>
-          <Button
-            variant="outline"
-            className="z-10 w-10 p-4 rounded-full dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
-            onClick={handleRestart}
-          >
-            <RotateCcw />
-          </Button>
-        </motion.div>
+        <CompletionView onRestart={handleRestart} />
       ) : (
         <div>
-          <StepperIndicator activeStep={activeStep} />
+          <StepperIndicator activeStep={activeStep} totalSteps={totalSteps} />
           <motion.div
             key={activeStep}
             initial={{ x: direction === "left" ? 300 : -300 }}
@@ -86,37 +38,54 @@ const MultiStepForm = () => {
               duration: 0.3,
             }}
           >
-            {getStepContent(activeStep)}
+            {getStepContent(activeStep, totalSteps)}
           </motion.div>
-          <div className="flex flex-row gap-4 justify-center items-center">
-            <Button
-              variant="outline"
-              className="w-24 rounded-3xl dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
-              onClick={handleBack}
-              disabled={activeStep === 1}
-            >
-              Back
-            </Button>
-            {activeStep === 3 ? (
-              <Button
-                className="w-24 rounded-3xl dark:bg-secondary dark:text-primary dark:hover:bg-secondary/90"
-                onClick={handleDone}
-              >
-                Done
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                className="w-24 rounded-3xl dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
-                onClick={handleNext}
-              >
-                Next
-              </Button>
-            )}
-          </div>
+          <StepperButtons
+            activeStep={activeStep}
+            maxSteps={totalSteps}
+            onNext={handleNext}
+            onBack={handleBack}
+            onDone={handleDone}
+          />
         </div>
       )}
     </div>
   );
 };
+
 export default MultiStepForm;
+
+function getStepContent(step: number, totalSteps: number) {
+  if (step > 0 && step <= totalSteps) {
+    return <DummyContent step={step} />;
+  }
+  return "Unknown step";
+}
+
+const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.8 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    className="relative flex flex-col justify-center items-center p-4"
+  >
+    <Confetti />
+    <div className="absolute top-0 mt-4 text-md dark:text-secondary text-center">
+      I hope you have fun using this component. Please feel free to reach me at{" "}
+      <a
+        className="hover:text-emerald-500"
+        href="mailto:s.soroush2012@gmail.com"
+      >
+        s.soroush2012@gmail.com
+      </a>
+    </div>
+    <Button
+      variant="outline"
+      className="z-10 w-10 p-4 rounded-full dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
+      onClick={onRestart}
+    >
+      <RotateCcw />
+    </Button>
+  </motion.div>
+);
