@@ -21,11 +21,11 @@ const StepperForm = () => {
   } = useStepper(totalSteps);
 
   return (
-    <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden">
+    <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden mx-4 min-w-80 md:min-w-96 h-[270px] flex flex-col justify-between">
       {isCompleted ? (
         <CompletionView onRestart={handleRestart} />
       ) : (
-        <div>
+        <>
           <StepperIndicator activeStep={activeStep} totalSteps={totalSteps} />
           <motion.div
             key={activeStep}
@@ -46,7 +46,7 @@ const StepperForm = () => {
             onBack={handleBack}
             onDone={handleDone}
           />
-        </div>
+        </>
       )}
     </div>
   );
@@ -67,11 +67,15 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.8 }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    className="relative flex flex-col justify-center items-center p-4"
+    className="relative flex flex-col justify-between items-center h-full"
   >
-    <Confetti />
-    <div className="absolute top-0 mt-4 text-md dark:text-secondary text-center">
-      I hope you have fun using this component. Please feel free to reach me at{" "}
+    <Confetti style={{ width: 350, height: 200 }} />
+    <div className="absolute mt-4 dark:text-secondary text-center">
+      <p className="text-xl pb-4 font-semibold">Congratulations 🎉</p>
+      <p className="text-md">
+        I hope you have fun using this component. Please feel free to reach me
+        at
+      </p>{" "}
       <a
         className="hover:text-emerald-500"
         href="mailto:s.soroush2012@gmail.com"
@@ -81,7 +85,7 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
     </div>
     <Button
       variant="outline"
-      className="z-10 w-10 p-4 rounded-full dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
+      className="absolute z-10 w-10 bottom-0 p-4 rounded-full dark:bg-foreground dark:text-secondary dark:hover:bg-primary/90 dark:hover:text-secondary"
       onClick={onRestart}
     >
       <RotateCcw />
