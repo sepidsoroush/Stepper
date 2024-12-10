@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useStepper } from "@/hooks/useStepper";
 import { Button } from "./ui/button";
 import Confetti from "./ui/confetti";
@@ -27,18 +27,21 @@ const StepperForm = () => {
       ) : (
         <>
           <StepperIndicator activeStep={activeStep} totalSteps={totalSteps} />
-          <motion.div
-            key={activeStep}
-            initial={{ x: direction === "left" ? 300 : -300 }}
-            animate={{ x: 0 }}
-            exit={{ x: direction === "left" ? -300 : 300 }}
-            transition={{
-              ease: "easeOut",
-              duration: 0.3,
-            }}
-          >
-            {getStepContent(activeStep, totalSteps)}
-          </motion.div>
+
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={activeStep}
+              initial={{ x: direction === "left" ? 300 : -300 }}
+              animate={{ x: 0 }}
+              transition={{
+                ease: "easeOut",
+                duration: 0.3,
+              }}
+            >
+              {getStepContent(activeStep, totalSteps)}
+            </motion.div>
+          </AnimatePresence>
+
           <StepperButtons
             activeStep={activeStep}
             maxSteps={totalSteps}
@@ -65,7 +68,6 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.8 }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
     className="relative flex flex-col justify-between items-center h-full"
   >
