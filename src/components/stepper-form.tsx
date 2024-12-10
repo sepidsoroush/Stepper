@@ -7,7 +7,7 @@ import DummyContent from "./dummy-content";
 import StepperButtons from "./stepper-buttons";
 import { RotateCcw } from "lucide-react";
 
-const MultiStepForm = () => {
+const StepperForm = () => {
   const totalSteps = 3;
 
   const {
@@ -33,7 +33,6 @@ const MultiStepForm = () => {
             animate={{ x: 0 }}
             exit={{ x: direction === "left" ? -300 : 300 }}
             transition={{
-              type: "tween",
               ease: "easeOut",
               duration: 0.3,
             }}
@@ -53,7 +52,7 @@ const MultiStepForm = () => {
   );
 };
 
-export default MultiStepForm;
+export default StepperForm;
 
 function getStepContent(step: number, totalSteps: number) {
   if (step > 0 && step <= totalSteps) {

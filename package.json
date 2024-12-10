@@ -1,5 +1,5 @@
 {
-  "name": "multi-step",
+  "name": "stepper",
   "private": true,
   "version": "0.0.0",
   "type": "module",
