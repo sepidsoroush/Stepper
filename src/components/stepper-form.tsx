@@ -74,16 +74,16 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
     <Confetti style={{ width: 350, height: 200 }} />
     <div className="absolute mt-4 dark:text-secondary text-center">
       <p className="text-xl pb-4 font-semibold">Congratulations 🎉</p>
-      <p className="text-md">
-        I hope you have fun using this component. Please feel free to reach me
-        at
-      </p>{" "}
+      <span className="text-md">
+        I hope you have fun using this component. Please feel free to
+      </span>{" "}
       <a
         className="hover:text-emerald-500"
         href="mailto:s.soroush2012@gmail.com"
       >
-        s.soroush2012@gmail.com
+        reach me
       </a>
+      {"."}
     </div>
     <Button
       variant="outline"
