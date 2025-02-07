@@ -83,7 +83,7 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
       >
         reach me
       </a>
-      {"."}
+      <span className="text-md"> if you have any questions.</span>
     </div>
     <Button
       variant="outline"
