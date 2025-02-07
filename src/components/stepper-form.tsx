@@ -21,34 +21,40 @@ const StepperForm = () => {
   } = useStepper(totalSteps);
 
   return (
-    <div className="border p-4 rounded-xl dark:border-secondary/50 overflow-hidden mx-4 min-w-80 md:min-w-96 h-[270px] flex flex-col justify-between">
+    <div className="border p-6 rounded-xl dark:border-secondary/50 overflow-hidden mx-4 min-w-80 md:min-w-96 min-h-[270px] flex flex-col justify-between">
       {isCompleted ? (
         <CompletionView onRestart={handleRestart} />
       ) : (
         <>
           <StepperIndicator activeStep={activeStep} totalSteps={totalSteps} />
 
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={activeStep}
-              initial={{ x: direction === "left" ? 300 : -300 }}
-              animate={{ x: 0 }}
-              transition={{
-                ease: "easeOut",
-                duration: 0.3,
-              }}
-            >
-              {getStepContent(activeStep, totalSteps)}
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative h-[200px] my-8">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeStep}
+                initial={{ x: direction === "left" ? 300 : -300, opacity: 0, position: "absolute", width: "100%" }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: direction === "left" ? -300 : 300, opacity: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.3,
+                }}
+                className="z-0"
+              >
+                {getStepContent(activeStep, totalSteps)}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-          <StepperButtons
-            activeStep={activeStep}
-            maxSteps={totalSteps}
-            onNext={handleNext}
-            onBack={handleBack}
-            onDone={handleDone}
-          />
+          <div className="relative z-10">
+            <StepperButtons
+              activeStep={activeStep}
+              maxSteps={totalSteps}
+              onNext={handleNext}
+              onBack={handleBack}
+              onDone={handleDone}
+            />
+          </div>
         </>
       )}
     </div>
@@ -78,8 +84,9 @@ const CompletionView = ({ onRestart }: { onRestart: () => void }) => (
         I hope you have fun using this component. Please feel free to
       </span>{" "}
       <a
+      target="_blank"
         className="hover:text-emerald-500"
-        href="mailto:s.soroush2012@gmail.com"
+        href="https://sepidev.vercel.app/"
       >
         reach me
       </a>

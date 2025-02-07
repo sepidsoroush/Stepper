@@ -7,6 +7,8 @@ interface StepperIndicatorProps {
   totalSteps: number;
 }
 
+const stepTitles = ["Personal", "Contact", "Account"];
+
 const StepperIndicator = ({
   activeStep,
   totalSteps,
@@ -15,30 +17,41 @@ const StepperIndicator = ({
 
   return (
     <AnimatePresence initial={false}>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-start">
         {steps.map((step) => (
           <Fragment key={step}>
-            <motion.div
-              animate={{
-                scale: step === activeStep ? 1.1 : 1,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              }}
-              className={cn(
-                "w-8 h-8 md:w-10 md:h-10 flex justify-center items-center m-[5px] border-2 rounded-full dark:border-secondary/50 text-primary/50 dark:text-secondary/50",
-                step < activeStep &&
-                  "border-primary bg-primary dark:bg-secondary text-primary-foreground dark:text-primary",
-                step === activeStep &&
-                  "border-primary dark:border-secondary text-primary dark:text-secondary transition delay-300 ease-in-out duration-300"
-              )}
-            >
-              {step >= activeStep ? step : <CheckIcon className="h-5 w-5" />}
-            </motion.div>
+            <div className="flex flex-col items-center">
+              <motion.div
+                animate={{
+                  scale: step === activeStep ? 1.1 : 1,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }}
+                className={cn(
+                  "w-8 h-8 md:w-10 md:h-10 flex justify-center items-center m-[5px] border-2 rounded-full dark:border-secondary/50 text-primary/50 dark:text-secondary/50",
+                  step < activeStep &&
+                    "border-primary bg-primary dark:bg-secondary text-primary-foreground dark:text-primary",
+                  step === activeStep &&
+                    "border-primary dark:border-secondary text-primary dark:text-secondary transition delay-300 ease-in-out duration-300"
+                )}
+              >
+                {step >= activeStep ? step : <CheckIcon className="h-5 w-5" />}
+              </motion.div>
+              <motion.span
+                animate={{
+                  scale: step === activeStep ? 1.1 : 1,
+                  opacity: step <= activeStep ? 1 : 0.5,
+                }}
+                className="text-xs mt-1 font-medium text-primary/80 dark:text-secondary/80"
+              >
+                {stepTitles[step - 1]}
+              </motion.span>
+            </div>
             {step !== totalSteps && (
-              <div className="relative w-24 h-[2px]">
+              <div className="relative w-24 h-[2px] mt-6">
                 <div
                   className={cn(
                     "absolute inset-0 bg-border dark:bg-secondary dark:opacity-50"
