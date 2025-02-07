@@ -189,12 +189,20 @@ const DummyContent = ({ step }: DummyContentProps) => {
       return (
         <div className="space-y-4 py-2">
           <div className="space-y-2">
-            <Label htmlFor="firstName">First Name</Label>
-            <Input id="firstName" placeholder="Enter your first name" />
+            <Label htmlFor="firstName" className="text-primary dark:text-secondary">First Name</Label>
+            <Input 
+              id="firstName" 
+              placeholder="Enter your first name" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input id="lastName" placeholder="Enter your last name" />
+            <Label htmlFor="lastName" className="text-primary dark:text-secondary">Last Name</Label>
+            <Input 
+              id="lastName" 
+              placeholder="Enter your last name" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
         </div>
       );
@@ -202,12 +210,22 @@ const DummyContent = ({ step }: DummyContentProps) => {
       return (
         <div className="space-y-4 py-2">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
+            <Label htmlFor="email" className="text-primary dark:text-secondary">Email</Label>
+            <Input 
+              id="email" 
+              type="email" 
+              placeholder="Enter your email" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" type="tel" placeholder="Enter your phone number" />
+            <Label htmlFor="phone" className="text-primary dark:text-secondary">Phone</Label>
+            <Input 
+              id="phone" 
+              type="tel" 
+              placeholder="Enter your phone number" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
         </div>
       );
@@ -215,12 +233,21 @@ const DummyContent = ({ step }: DummyContentProps) => {
       return (
         <div className="space-y-4 py-2">
           <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
-            <Input id="username" placeholder="Choose a username" />
+            <Label htmlFor="username" className="text-primary dark:text-secondary">Username</Label>
+            <Input 
+              id="username" 
+              placeholder="Choose a username" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="Choose a password" />
+            <Label htmlFor="password" className="text-primary dark:text-secondary">Password</Label>
+            <Input 
+              id="password" 
+              type="password" 
+              placeholder="Choose a password" 
+              className="bg-background dark:bg-foreground dark:text-secondary placeholder:text-muted-foreground dark:placeholder:text-secondary/50"
+            />
           </div>
         </div>
       );
