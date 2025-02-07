@@ -1,4 +1,4 @@
-import StepperDemo from "./components/Stepper";
+// import StepperDemo from "./components/Stepper";
 import StepperForm from "./components/stepper-form";
 
 function App() {
