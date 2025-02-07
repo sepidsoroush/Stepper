@@ -18,3 +18,11 @@ Check out the [Live Demo](stepper-sepidev.vercel.app)
 
 #### Light Mode
 ![light mode](https://github.com/user-attachments/assets/88136411-aaaa-436d-b1ea-c1cd3a35add0)
+
+## Implementation Approaches
+This component is provided in two formats:
+
+- Single-file version (Stepper.tsx) – A self-contained file with all logic, styles, and state included. This is ideal for quick copying and easy integration.
+- Structured version – The component is broken into smaller parts, including reusable subcomponents and a custom hook for managing step logic. This approach demonstrates best practices for maintainability and scalability.
+
+Both versions are available in the repository for different use cases.
