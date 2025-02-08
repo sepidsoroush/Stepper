@@ -13,11 +13,12 @@ A multi-step form with smooth sliding transitions between steps. The component s
 Check out the [Live Demo](stepper-sepidev.vercel.app)
 
 #### Dark Mode
-![dark mode](https://github.com/user-attachments/assets/8b6ab041-e2ca-4923-bfc9-dd10add236fa)
+
+![dark mode](https://github.com/user-attachments/assets/3880fda7-1c6a-4667-a77f-3cc541c73cd2)
 
 
 #### Light Mode
-![light mode](https://github.com/user-attachments/assets/88136411-aaaa-436d-b1ea-c1cd3a35add0)
+![light mode](https://github.com/user-attachments/assets/ca09b8c1-45b4-4b8f-8501-b69b8d60bc80)
 
 ## Implementation Approaches
 This component is provided in two formats:
