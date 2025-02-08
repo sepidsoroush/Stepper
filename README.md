@@ -10,7 +10,7 @@ A multi-step form with smooth sliding transitions between steps. The component s
 
 
 ## Preview
-Check out the [Live Demo](stepper-sepidev.vercel.app)
+Check out the [Live Demo](https://stepper-sepidev.vercel.app/)
 
 #### Dark Mode
 
